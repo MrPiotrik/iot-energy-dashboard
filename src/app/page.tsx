@@ -1,65 +1,112 @@
-import Image from "next/image";
+'use client';
+
+import {
+  Navbar,
+  Container,
+  Nav,
+  Row,
+  Col,
+  Card,
+  Button,
+  Table,
+  ProgressBar,
+  Alert,
+} from 'react-bootstrap';
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+    <>
+      <Navbar bg="dark" variant="dark" expand="lg">
+        <Container>
+          <Navbar.Brand>IoT Energy Dashboard</Navbar.Brand>
+          <Nav className="me-auto">
+            <Nav.Link href="#">Home</Nav.Link>
+            <Nav.Link href="#">Sensors</Nav.Link>
+            <Nav.Link href="#">Reports</Nav.Link>
+          </Nav>
+        </Container>
+      </Navbar>
+
+      <Container className="mt-4">
+        <Alert variant="success">
+          System status: Online
+        </Alert>
+
+        <Row className="g-4">
+          <Col md={3}>
+            <Card>
+              <Card.Body>
+                <Card.Title>Voltage</Card.Title>
+                <h3>220 V</h3>
+              </Card.Body>
+            </Card>
+          </Col>
+
+          <Col md={3}>
+            <Card>
+              <Card.Body>
+                <Card.Title>Current</Card.Title>
+                <h3>15 A</h3>
+              </Card.Body>
+            </Card>
+          </Col>
+
+          <Col md={3}>
+            <Card>
+              <Card.Body>
+                <Card.Title>Power</Card.Title>
+                <h3>3.3 kW</h3>
+              </Card.Body>
+            </Card>
+          </Col>
+
+          <Col md={3}>
+            <Card>
+              <Card.Body>
+                <Card.Title>Battery Level</Card.Title>
+                <ProgressBar now={75} label="75%" />
+              </Card.Body>
+            </Card>
+          </Col>
+        </Row>
+
+        <h2 className="mt-5 mb-3">Sensor Data</h2>
+
+        <Table striped bordered hover>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Sensor</th>
+              <th>Status</th>
+              <th>Value</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>Voltage Sensor</td>
+              <td>Active</td>
+              <td>220 V</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>Current Sensor</td>
+              <td>Active</td>
+              <td>15 A</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>Battery Sensor</td>
+              <td>Charging</td>
+              <td>75%</td>
+            </tr>
+          </tbody>
+        </Table>
+
+        <Button variant="primary" size="lg">
+          Refresh Data
+        </Button>
+      </Container>
+    </>
   );
 }
