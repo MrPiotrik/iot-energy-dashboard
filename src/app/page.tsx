@@ -1,60 +1,81 @@
 'use client';
 
-import { Container, Row, Col, Navbar } from "react-bootstrap";
-import ShopCard from "@/components/shopcard/ShopCard";
+import { useState } from "react";
+import { Container, Row, Col, Navbar, Alert } from "react-bootstrap";
+import ProductCard from "@/components/ProductCard";
 
 export default function Home() {
-  const cards = [
+  const [selectedId, setSelectedId] = useState<number | null>(null);
+
+  const items = [
     {
       id: 1,
-      title: "Smart Meter",
-      description: "Advanced smart meter for monitoring electricity consumption in real time.",
-      image: "https://picsum.photos/400/250?1",
+      name: "Smart Meter",
+      price: "$120",
+      image: "/images/meter.png",
     },
     {
       id: 2,
-      title: "Solar Panel",
-      description: "Efficient solar energy generation system for residential buildings.",
-      image: "https://picsum.photos/400/250?2",
+      name: "Solar Panel",
+      price: "$350",
+      image: "/images/solar.jfif",
     },
     {
       id: 3,
-      title: "Battery Storage",
-      description: "Energy storage system for balancing peak electrical loads.",
-      image: "https://picsum.photos/400/250?3",
+      name: "Battery Storage",
+      price: "$540",
+      image: "/images/battery.jfif",
     },
     {
       id: 4,
-      title: "EV Charger",
-      description: "Fast charging station for electric vehicles with smart monitoring.",
-      image: "https://picsum.photos/400/250?4",
+      name: "EV Charger",
+      price: "$290",
+      image: "/images/charger.jfif",
     },
   ];
+
+  const selectedItem = items.find(
+    (item) => item.id === selectedId
+  );
+
+  const addItem = (id: number) => {
+    setSelectedId(id);
+  };
 
   return (
     <>
       <Navbar bg="dark" variant="dark">
         <Container>
           <Navbar.Brand>
-            Energy Products Catalog
+            Energy Equipment Shop
           </Navbar.Brand>
         </Container>
       </Navbar>
 
-      <Container className="mt-5">
-        <h1 className="mb-4 text-center">
-          Shop Cards using Props
-        </h1>
+      <Container className="mt-4">
+        <Alert variant="info">
+          Selected item:{" "}
+          <strong>
+            {selectedItem
+              ? selectedItem.name
+              : "nothing selected"}
+          </strong>
+        </Alert>
 
         <Row className="g-4">
-          {cards.map((card) => (
+          {items.map((item) => (
             <Col
-              key={card.id}
+              key={item.id}
               xs={12}
+              sm={6}
               md={6}
               lg={3}
             >
-              <ShopCard card={card} />
+              <ProductCard
+                card={item}
+                selected={selectedId === item.id}
+                onSelect={addItem}
+              />
             </Col>
           ))}
         </Row>
