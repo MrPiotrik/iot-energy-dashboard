@@ -1,85 +1,80 @@
 'use client';
 
 import { useState } from "react";
-import { Container, Row, Col, Navbar, Alert } from "react-bootstrap";
-import ProductCard from "@/components/ProductCard";
+import { Container, Row, Col, Card, Button, Alert } from "react-bootstrap";
 
 export default function Home() {
-  const [selectedId, setSelectedId] = useState<number | null>(null);
-
-  const items = [
+  const products = [
     {
       id: 1,
-      name: "Smart Meter",
-      price: "$120",
+      title: "Smart Meter",
+      price: 120,
       image: "/images/meter.png",
+      added: 0,
     },
     {
       id: 2,
-      name: "Solar Panel",
-      price: "$350",
+      title: "Solar Panel",
+      price: 350,
       image: "/images/solar.jfif",
+      added: 0,
     },
     {
       id: 3,
-      name: "Battery Storage",
-      price: "$540",
+      title: "Battery Storage",
+      price: 540,
       image: "/images/battery.jfif",
+      added: 0,
     },
     {
       id: 4,
-      name: "EV Charger",
-      price: "$290",
+      title: "EV Charger",
+      price: 290,
       image: "/images/charger.jfif",
+      added: 0,
     },
   ];
 
-  const selectedItem = items.find(
-    (item) => item.id === selectedId
-  );
+  const [cart, setCart] = useState<number[]>([]);
 
-  const addItem = (id: number) => {
-    setSelectedId(id);
+  const addItem = (price: number) => {
+    setCart([...cart, price]);
   };
 
   return (
-    <>
-      <Navbar bg="dark" variant="dark">
-        <Container>
-          <Navbar.Brand>
-            Energy Equipment Shop
-          </Navbar.Brand>
-        </Container>
-      </Navbar>
+    <Container className="mt-4">
+      <Alert variant="success">
+        Total price: <strong>${cart.reduce((a, b) => a + b, 0)}</strong>
+      </Alert>
 
-      <Container className="mt-4">
-        <Alert variant="info">
-          Selected item:{" "}
-          <strong>
-            {selectedItem
-              ? selectedItem.name
-              : "nothing selected"}
-          </strong>
-        </Alert>
-
-        <Row className="g-4">
-          {items.map((item) => (
-            <Col
-              key={item.id}
-              xs={12}
-              sm={6}
-              md={6}
-              lg={3}
-            >
-              <ProductCard
-                card={item}
-                selected={selectedId === item.id}
-                onSelect={addItem}
+      <Row className="g-4">
+        {products.map((item) => (
+          <Col key={item.id} xs={12} sm={6} lg={3}>
+            <Card className="h-100 shadow-sm">
+              <Card.Img
+                variant="top"
+                src={item.image}
+                style={{
+                  height: "220px",
+                  objectFit: "cover",
+                }}
               />
-            </Col>
-          ))}
-        </Row>
-      </Container>
-    </>
+
+              <Card.Body>
+                <Card.Title>{item.title}</Card.Title>
+                <Card.Text>${item.price}</Card.Text>
+
+                <Button
+                  variant="success"
+                  onClick={() => addItem(item.price)}
+                >
+                  Add to Bin
+                </Button>
+              </Card.Body>
+            </Card>
+          </Col>
+        ))}
+      </Row>
+    </Container>
   );
 }
