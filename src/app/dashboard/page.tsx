@@ -51,7 +51,7 @@ export default function DashboardPage() {
     <div className="container mt-4">
       <h2>⚡ Energy Dashboard</h2>
       <p>IoT Energy Monitoring System</p>
-
+    <p>Last update: {new Date().toLocaleTimeString()}</p>
       <div className="row">
         {data.map((item, index) => (
           <div
