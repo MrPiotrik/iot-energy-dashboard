@@ -1,13 +1,5 @@
-import { Container } from "react-bootstrap";
+import BinComponent from "@/components/BinComponent";
 
 export default function BinPage() {
-  return (
-    <Container className="mt-5">
-      <h1>Bin</h1>
-
-      <p>
-        Selected products will appear here.
-      </p>
-    </Container>
-  );
+  return <BinComponent />;
 }

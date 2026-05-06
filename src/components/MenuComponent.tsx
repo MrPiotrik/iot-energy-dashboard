@@ -1,14 +1,14 @@
-'use client';
+"use client";
 
 import Link from "next/link";
-import { Navbar, Container, Nav } from "react-bootstrap";
+import { Container, Nav, Navbar } from "react-bootstrap";
 
 export default function MenuComponent() {
   return (
     <Navbar bg="dark" variant="dark" expand="lg">
       <Container>
         <Navbar.Brand as={Link} href="/">
-          Energy Shop
+          PZ
         </Navbar.Brand>
 
         <Nav className="me-auto">
