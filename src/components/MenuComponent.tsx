@@ -19,7 +19,9 @@ export default function MenuComponent() {
           <Nav.Link as={Link} href="/bin">
             Bin
           </Nav.Link>
-
+          
+          <Nav.Link href="/dashboard">Dashboard</Nav.Link>
+          
           <Nav.Link as={Link} href="/about">
             About
           </Nav.Link>
